@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\DTO\Cards\CreateCardDTO;
 use App\Models\Card;
 use App\Repositories\Contracts\ICardRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,14 +13,20 @@ class CardRepository implements ICardRepository
     {
     }
 
-    /**
-     * @param array $data
-     * @return Card
-     */
-    public function create(array $data): Card
+    /** {@inheritdoc } */
+    public function create(CreateCardDTO $dto): Card
     {
-        return $this->card->create($data);
+        return $this->card->create($dto->toArray());
     }
+
+
+
+
+
+
+
+
+    
 
     /**
      * @param null|array $filter
