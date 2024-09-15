@@ -2,26 +2,17 @@
 
 namespace App\Http\Controllers\Validators\Cards;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
-
-class StoreCardValidator
+use App\Http\Controllers\Validators\CommomValidator;
+class StoreCardValidator extends CommomValidator
 {
-    public static function validate(array $request)
+    public function __construct()
     {
-        $validator = Validator::make($request, self::rules());
-
-        if ($validator->fails()) {
-            throw ValidationException::withMessages($validator->getMessageBag()->messages());
-        }
-
-        return $validator;
+        $this->rules();
     }
 
-    /** @return array */
-    private static function rules(): array
+    public function rules() 
     {
-        return [
+        $this->rules =  [
             'nome'           => 'required|max:100',
             'anuidade'       => 'required|numeric',
             'data_expiracao' => 'required|numeric',
