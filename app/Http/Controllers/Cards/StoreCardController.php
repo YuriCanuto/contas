@@ -18,7 +18,7 @@ class StoreCardController extends Controller {
         StoreCardValidator $storeCardValidator
     )
     { 
-        $validate = $storeCardValidator->validate($request->input());
+        $validate = $storeCardValidator::validate($request->input());
 
         try {
             

@@ -31,12 +31,12 @@
 
                                 <div class="mb-3">
                                     <label for="anuidade" class="form-label">Anuidade (R$)</label>
-                                    <input type="text" class="form-control" name="anuidade" id="anuidade">
+                                    <input type="text" class="form-control" name="anuidade" id="anuidade" value="{{ old('anuidade') }}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="data_expiracao" class="form-label">Data Expiração</label>
-                                    <input type="text" class="form-control" name="data_expiracao" id="data_expiracao">
+                                    <input type="text" class="form-control" name="data_expiracao" id="data_expiracao" value="{{ old('data_expiracao') }}">
                                 </div>
                             </div>
 

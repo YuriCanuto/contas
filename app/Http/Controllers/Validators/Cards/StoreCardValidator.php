@@ -7,9 +7,9 @@ use Illuminate\Validation\ValidationException;
 
 class StoreCardValidator
 {
-    public function validate(array $request)
+    public static function validate(array $request)
     {
-        $validator = Validator::make($request, $this->rules());
+        $validator = Validator::make($request, self::rules());
 
         if ($validator->fails()) {
             throw ValidationException::withMessages($validator->getMessageBag()->messages());
@@ -19,7 +19,7 @@ class StoreCardValidator
     }
 
     /** @return array */
-    private function rules(): array
+    private static function rules(): array
     {
         return [
             'nome'           => 'required|max:100',
