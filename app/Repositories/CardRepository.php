@@ -3,9 +3,11 @@
 namespace App\Repositories;
 
 use App\DTO\Cards\CreateCardDTO;
+use App\DTO\Cards\UpdateCardDTO;
 use App\Models\Card;
 use App\Repositories\Contracts\ICardRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class CardRepository implements ICardRepository
 {
@@ -19,78 +21,53 @@ class CardRepository implements ICardRepository
         return $this->card->create($dto->toArray());
     }
 
-
-
-
-
-
-
-
-    
-
-    /**
-     * @param null|array $filter
-     * @return Collection
-     */
-    public function list(string $user_id, ?array $filter): Collection
+    /** {@inheritdoc } */
+    public function list(array $filter): Collection
     {
-        $mes = data_get($filter, 'mes', date('n'));
-        $ano = data_get($filter, 'ano', date('Y'));
+        // $mes = data_get($filter, 'mes', date('n'));
+        // $ano = data_get($filter, 'ano', date('Y'));
 
         return $this->card
-            ->where('user_id', $user_id)
-            ->with(['transacoes' => function ($query) use ($mes, $ano) {
-                $query->with(['parcelas' => function($query) use ($mes, $ano) {
-                    $query->select([
-                        'id', 'transacao_id', 'parcela', 'valor', 'mes', 'ano',
-                        'desconto', 'is_pago', 'data_pagamento'
-                    ]);
-                    $query->where('mes', $mes);
-                    $query->where('ano', $ano);
-                }]);
-                $query->where('ativo', true);
-            }])
+            ->where('user_id', Auth::user()->id)
+            // ->with(['transacoes' => function ($query) use ($mes, $ano) {
+            //     $query->with(['parcelas' => function($query) use ($mes, $ano) {
+            //         $query->select([
+            //             'id', 'transacao_id', 'parcela', 'valor', 'mes', 'ano',
+            //             'desconto', 'is_pago', 'data_pagamento'
+            //         ]);
+            //         $query->where('mes', $mes);
+            //         $query->where('ano', $ano);
+            //     }]);
+            //     $query->where('ativo', true);
+            // }])
             ->latest()
             ->get();
     }
 
-    /**
-     * @param string $user_id
-     * @param string $card_id
-     * @return null|Card
-     */
-    public function show(string $user_id, string $card_id): Card
+    /** {@inheritdoc } */
+    public function show(string $card_id): Card
     {
         return $this->card
+            ->where('user_id', Auth::user()->id)
             ->where('id', $card_id)
-            ->where('user_id', $user_id)
             ->first();
     }
 
-    /**
-     * @param string $user_id
-     * @param string $card_id
-     * @param array $data
-     * @return bool
-     */
-    public function update(string $user_id, string $card_id, array $data): bool
+    /** {@inheritdoc } */
+    public function update(UpdateCardDTO $dto): bool
     {
         return $this->card
-            ->where('id', $card_id)
-            ->where('user_id', $user_id)
-            ->update($data);
+            ->where('id', $dto->id)
+            ->where('user_id', $dto->user_id)
+            ->update(array_filter_null($dto->toArray(['id'])));
     }
 
-    /**
-     * @param string $user_id
-     * @param string $card_id
-     * @return bool
-     */
-    public function delete(string $user_id, string $card_id): bool
+    /** {@inheritdoc } */
+    public function delete(string $card_id): bool
     {
         return $this->card
+            ->where('user_id', Auth::user()->id)
             ->where('id', $card_id)
-            ->where('user_id', $user_id)
             ->delete();
     }
 }

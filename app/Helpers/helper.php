@@ -3,7 +3,7 @@
 use Carbon\CarbonPeriod;
 
 if (! function_exists('meses_do_ano')) {
-    function mesesDoAno(): array {
+    function meses_do_ano(): array {
         return [
             1  => 'Janeiro',
             2  => 'Fevereiro',
@@ -22,9 +22,21 @@ if (! function_exists('meses_do_ano')) {
 }
 
 if (! function_exists('range_ano')) {
-    function rangeAno(): array {
+    function range_ano(): array {
         return collect(CarbonPeriod::create('2023-01-01', '1 year', now()->endOfYear()))
             ->map(fn($ano) => $ano->format('Y'))
             ->toArray();
+    }
+}
+
+if (! function_exists('get_true_ou_false')) {
+    function get_true_ou_false($value): string {
+        return $value ? 'true' : 'false';
+    }
+}
+
+if (! function_exists('array_filter_null')) {
+    function array_filter_null(array $value): array {
+        return array_filter($value, fn ($value) => !is_null($value));
     }
 }

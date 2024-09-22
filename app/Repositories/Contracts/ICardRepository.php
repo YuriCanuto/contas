@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\DTO\Cards\CreateCardDTO;
+use App\DTO\Cards\UpdateCardDTO;
 use App\Models\Card;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -14,11 +15,27 @@ interface ICardRepository
      */
     public function create(CreateCardDTO $createCardDTO): Card;
 
-    public function list(string $user_id, ?array $filter): Collection;
+    /**
+     * @param array $filter
+     * @return Collection
+     */
+    public function list(array $filter): Collection;
 
-    public function show(string $user_id, string $card_id): Card;
+    /**
+     * @param string $card_id
+     * @return Card
+     */
+    public function show(string $card_id): Card;
 
-    public function update(string $user_id, string $card_id, array $data): bool;
+    /**
+     * @param UpdateCardDTO $updateCardDTO
+     * @return bool
+     */
+    public function update(UpdateCardDTO $updateCardDTO): bool;
 
-    public function delete(string $user_id, string $card_id): bool;
+    /**
+     * @param string $card_id
+     * @return bool
+     */
+    public function delete(string $card_id): bool;
 }

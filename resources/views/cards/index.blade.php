@@ -16,6 +16,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nome</th>
+                                        <th scope="col">Ativo</th>
                                         <th scope="col">Compartilhado</th>
                                         <th scope="col">Data Expiração</th>
                                         <th scope="col">Ação</th>
@@ -25,9 +26,12 @@
                                     @foreach ($cards as $card)
                                         <tr>
                                             <td scope="row">{{ $card->nome }}</td>
-                                            <td scope="row">{{ $card->is_compartilhado }}</td>
+                                            <td scope="row">{!! $card->ativado !!}</td>
+                                            <td scope="row">{!! $card->compartilhado !!}</td>
                                             <td scope="row">{{ $card->data_expiracao }}</td>
-                                            <td scope="row"></td>
+                                            <td scope="row">
+                                                <a href="{{ route('cards.editar', ['card_id' => $card->id]) }}" type="button" class="btn btn-primary btn-sm">Editar</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
