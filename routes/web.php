@@ -23,5 +23,5 @@ Route::prefix('cards')->name('cards.')->group(function () {
     Route::post('/create', StoreCardController::class)->name('store');
     Route::get('/editar/{card_id}', EditarCardController::class)->name('editar');
     Route::put('/update/{card_id}', UpdateCardController::class)->name('update');
-    Route::get('/delete/{card_id}', DeleteCardController::class)->name('delete');
+    Route::delete('/delete/{card_id}', DeleteCardController::class)->name('delete');
 });

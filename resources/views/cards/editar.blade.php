@@ -63,9 +63,9 @@
 
                             <div class="d-flex flex-row justify-content-between align-items-center mt-3">
                                 <button class="btn btn-primary" type="submit">Salvar</button>
-                                <a class="btn btn-danger btnDeletar"
-                                    onclick="return confirm('Você deseja deletar?')"
-                                    href="{{ route('cards.delete', ['card_id' => $card->id]) }}">Deletar</a>
+                                <button id="btnDeletar" type="button" class="btn btn-danger"
+                                    url="{{ route('cards.delete', ['card_id' => $card->id]) }}"
+                                    urlCallback="{{ route('cards.listar') }}">Deletar</button>
                             </div>
 
                         </form>
