@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Transacao;
 use App\Repositories\Contracts\ITransacaoRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class TransacaoRepository implements ITransacaoRepository
 {
@@ -28,8 +29,8 @@ class TransacaoRepository implements ITransacaoRepository
      */
     public function list(string $card_id, array $filter = []): Collection
     {
-        $mes = data_get($filter, 'mes', date('n'));
-        $ano = data_get($filter, 'ano', date('Y'));
+        $mes = Arr::get($filter, 'mes', date('n'));
+        $ano = Arr::get($filter, 'ano', date('Y'));
 
         return $this->transacao
             ->where('card_id', $card_id)

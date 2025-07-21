@@ -3,6 +3,7 @@
 namespace App\DTO\Cards;
 
 use App\Traits\DTO;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class UpdateCardDTO
@@ -26,8 +27,8 @@ class UpdateCardDTO
     public function customizar(array $data): array
     {
         $data['user_id'] = Auth::user()->id;
-        $data['ativo']   = data_get($data, 'ativo', false);
-        $data['is_compartilhado'] = data_get($data, 'is_compartilhado', false);
+        $data['ativo'] = Arr::get($data, 'ativo', false);
+        $data['is_compartilhado'] = Arr::get($data, 'is_compartilhado', false);
 
         return $data;
     }

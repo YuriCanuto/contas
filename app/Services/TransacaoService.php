@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Transacao;
 use App\Repositories\Contracts\IParcelaRepository;
 use App\Repositories\Contracts\ITransacaoRepository;
+use Illuminate\Support\Arr;
 
 class TransacaoService
 {
@@ -24,7 +25,7 @@ class TransacaoService
         $transacao = $this->transacaoRepository->create($data);
 
         $mes = $data['mes_inicio'];
-        $ano = data_get($data, 'ano_inicio') ? $data['ano_inicio'] : date('Y');
+        $ano = Arr::get($data, 'ano_inicio') ? $data['ano_inicio'] : date('Y');
         $numero = 0;
 
         for ($i = 0; $i < $data['parcelas']; $i++) {

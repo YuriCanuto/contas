@@ -24,22 +24,8 @@ class CardRepository implements ICardRepository
     /** {@inheritdoc } */
     public function list(array $filter): Collection
     {
-        // $mes = data_get($filter, 'mes', date('n'));
-        // $ano = data_get($filter, 'ano', date('Y'));
-
         return $this->card
             ->where('user_id', Auth::user()->id)
-            // ->with(['transacoes' => function ($query) use ($mes, $ano) {
-            //     $query->with(['parcelas' => function($query) use ($mes, $ano) {
-            //         $query->select([
-            //             'id', 'transacao_id', 'parcela', 'valor', 'mes', 'ano',
-            //             'desconto', 'is_pago', 'data_pagamento'
-            //         ]);
-            //         $query->where('mes', $mes);
-            //         $query->where('ano', $ano);
-            //     }]);
-            //     $query->where('ativo', true);
-            // }])
             ->latest()
             ->get();
     }

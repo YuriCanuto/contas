@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Arr;
+
 trait DTO
 {
     /**
@@ -13,7 +15,7 @@ trait DTO
         $data = $this->customizar($data);
 
         foreach (array_keys(get_class_vars(__CLASS__)) as $value) {
-            $this->{$value} = data_get($data, $value);
+            $this->{$value} = Arr::get($data, $value);
         }
 
         return self::class;
