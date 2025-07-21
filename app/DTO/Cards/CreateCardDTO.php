@@ -11,12 +11,13 @@ class CreateCardDTO
 
     public string   $user_id;
     public string   $nome;
+    public ?string  $numero_final;
     public ?string  $descricao;
     public float    $anuidade;
     public ?string  $extras;
     public bool     $ativo;
     public bool     $is_compartilhado;
-    public int      $data_expiracao;
+    public int      $melhor_dia_compra;
 
     /**
      * @param  array  $data

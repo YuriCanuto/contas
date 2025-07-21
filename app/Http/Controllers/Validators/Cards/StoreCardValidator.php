@@ -13,9 +13,10 @@ class StoreCardValidator extends CommomValidator
     public function rules() 
     {
         $this->rules =  [
-            'nome'           => 'required|max:100',
-            'anuidade'       => 'required|numeric',
-            'data_expiracao' => 'required|numeric',
+            'nome'              => 'required|max:100',
+            'numero_final'      => 'nullable|max:4',
+            'anuidade'          => 'required|numeric',
+            'melhor_dia_compra' => 'required|numeric',
         ];
     }
 }

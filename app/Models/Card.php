@@ -21,16 +21,16 @@ class Card extends Model
         'user_id',
         'nome',
         'descricao',
+        'numero_final',
         'anuidade',
-        'extras',
         'ativo',
         'is_compartilhado',
-        'data_expiracao',
+        'melhor_dia_compra',
     ];
 
     protected $casts = [
         'is_compartilhado' => 'boolean',
-        'ativo'            => 'boolean'
+        'ativo'            => 'boolean',
     ];
 
     protected function ativado(): Attribute

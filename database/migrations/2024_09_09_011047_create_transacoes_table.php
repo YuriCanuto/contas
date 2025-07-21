@@ -15,7 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('card_id')->references('id')->on('cards');
             $table->foreignUuid('responsavel_id')->references('id')->on('responsaveis');
-            $table->string('descricao');
+            $table->date('data_compra');
+            $table->string('descricao', 100);
             $table->boolean('ativo')->default(true);
             $table->timestamps();
             $table->softDeletes();
@@ -24,10 +25,10 @@ return new class extends Migration
         Schema::create('parcelas', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('transacao_id')->references('id')->on('transacoes');
-            $table->string('parcela', 20);
+            $table->char('mes', 2);
+            $table->char('ano', 4);
+            $table->char('parcela', 3);
             $table->float('valor', 10, 2);
-            $table->unsignedInteger('mes');
-            $table->string('ano', 4);
             $table->float('desconto', 10, 2)->default(0);
             $table->boolean('ativo')->default(true);
             $table->boolean('is_pago')->default(false);

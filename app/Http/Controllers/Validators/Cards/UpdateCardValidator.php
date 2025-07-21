@@ -14,12 +14,13 @@ class UpdateCardValidator extends CommomValidator
     public function rules() 
     {
         $this->rules =  [
-            'id'               => 'required|uuid|exists:cards,id',
-            'nome'             => 'required|max:100',
-            'anuidade'         => 'required|numeric',
-            'data_expiracao'   => 'required|numeric',
-            'ativo'            => 'nullable',
-            'is_compartilhado' => 'nullable',
+            'id'                => 'required|uuid|exists:cards,id',
+            'nome'              => 'required|max:100',
+            'numero_final'      => 'nullable|max:4',
+            'anuidade'          => 'required|numeric',
+            'ativo'             => 'nullable',
+            'is_compartilhado'  => 'nullable',
+            'melhor_dia_compra' => 'required|numeric',
         ];
     }
 }

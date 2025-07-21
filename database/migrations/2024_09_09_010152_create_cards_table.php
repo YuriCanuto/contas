@@ -15,12 +15,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->references('id')->on('users');
             $table->string('nome', 100);
-            $table->string('descricao', 255)->nullable();
+            $table->string('descricao', 100)->nullable();
+            $table->char('numero_final', 4)->nullable();
             $table->float('anuidade', 3, 2)->default(0);
-            $table->json('extras', 3, 2)->nullable();
             $table->boolean('ativo')->default(true);
             $table->boolean('is_compartilhado')->default(true);
-            $table->unsignedInteger('data_expiracao');
+            $table->char('melhor_dia_compra', 2);
             $table->timestamps();
             $table->softDeletes();
         });

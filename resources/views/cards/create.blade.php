@@ -26,17 +26,26 @@
                             <div class="col-6">
                                 <div class="mb-3">
                                     <label for="nome" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome') }}">
+                                    <input type="text" class="form-control" name="nome" id="nome"
+                                        value="{{ old('nome') }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="numero_final" class="form-label">Cartão Final</label>
+                                    <input type="text" class="form-control" name="numero_final" id="numero_final"
+                                        value="{{ old('numero_final') }}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="anuidade" class="form-label">Anuidade (R$)</label>
-                                    <input type="text" class="form-control" name="anuidade" id="anuidade" value="{{ old('anuidade') }}">
+                                    <input type="text" class="form-control" name="anuidade" id="anuidade"
+                                        value="{{ old('anuidade') }}">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="data_expiracao" class="form-label">Data Expiração</label>
-                                    <input type="text" class="form-control" name="data_expiracao" id="data_expiracao" value="{{ old('data_expiracao') }}">
+                                    <label for="melhor_dia_compra" class="form-label">Melhor dia para compra</label>
+                                    <input type="text" class="form-control" name="melhor_dia_compra"
+                                        id="melhor_dia_compra" value="{{ old('melhor_dia_compra') }}">
                                 </div>
                             </div>
 

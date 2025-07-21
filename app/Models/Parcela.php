@@ -18,10 +18,10 @@ class Parcela extends Model
 
     protected $fillable = [
         'transacao_id',
-        'parcela',
-        'valor',
         'mes',
         'ano',
+        'parcela',
+        'valor',
         'desconto',
         'ativo',
         'is_pago',
@@ -29,11 +29,11 @@ class Parcela extends Model
     ];
 
     protected $casts = [
-        'valor'    => 'float',
-        'ano'      => 'integer',
-        'is_pago'  => 'boolean',
+        'valor' => 'float',
         'desconto' => 'float',
-        'ativo'    => 'boolean',
+        'is_pago' => 'boolean',
+        'ativo' => 'boolean',
+        'data_pagamento' => 'datetime',
     ];
 
     /** @return BelongsTo */

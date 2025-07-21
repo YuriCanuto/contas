@@ -20,12 +20,14 @@ class Transacao extends Model
     protected $fillable = [
         'card_id',
         'responsavel_id',
+        'data_compra',
         'descricao',
         'ativo'
     ];
 
     protected $casts = [
-        'ativo' => 'boolean'
+        'ativo' => 'boolean',
+        'data_compra' => 'date',
     ];
 
     /** @return BelongsTo */
