@@ -7,24 +7,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Validators\Cards\StoreCardValidator;
 use App\Repositories\Contracts\ICardRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class StoreCardController extends Controller {
 
     public function __invoke(
         Request $request,
-        CreateCardDTO $createCardDTO,
         ICardRepository $cardRepository,
         StoreCardValidator $storeCardValidator
     )
     { 
+        $request->merge(['user_id' => Auth::user()->id]);
+
         $validate = $storeCardValidator->validate($request->input());
 
         try {
-            
-            $createCardDTO->registrar($validate->validated());
 
-            $cardRepository->create($createCardDTO);
+            $dto = CreateCardDTO::from($request->input());
+
+            $cardRepository->create($dto);
 
             return redirect()->route('cards.listar');
 
@@ -33,7 +35,6 @@ class StoreCardController extends Controller {
             return redirect()->back()->withErrors($validate)->withInput();
             
         } catch (\Exception $exception) {
-            
             Log::error($exception->getMessage());
             return abort(500);
         }

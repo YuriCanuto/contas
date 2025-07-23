@@ -2,33 +2,21 @@
 
 namespace App\DTO\Cards;
 
-use App\Traits\DTO;
-use Illuminate\Support\Facades\Auth;
+use Spatie\LaravelData\Data;
 
-class CreateCardDTO
+class CreateCardDTO extends Data
 {
-    use DTO;
-
-    public string   $user_id;
-    public string   $nome;
-    public ?string  $numero_final;
-    public ?string  $descricao;
-    public float    $anuidade;
-    public ?string  $extras;
-    public bool     $ativo;
-    public bool     $is_compartilhado;
-    public int      $melhor_dia_compra;
-
-    /**
-     * @param  array  $data
-     * @return array
-     */
-    public function customizar(array $data): array
-    {
-        $data['user_id'] = Auth::user()->id;
-        $data['ativo']   = true;
-        $data['is_compartilhado'] = true;
-
-        return $data;
+    public function __construct(
+        public string       $user_id,
+        public string       $nome,
+        public string|null  $numero_final,
+        public string|null  $descricao,
+        public float        $anuidade,
+        public bool|null    $ativo,
+        public bool|null    $is_compartilhado,
+        public int          $melhor_dia_compra
+    ) {
+        $this->ativo = true;
+        $this->is_compartilhado = true;
     }
 }

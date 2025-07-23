@@ -25,6 +25,3 @@ Route::middleware('auth')->group(function () {
 });
 
 Auth::routes();
-
-// REDIRECIONA PARA A TELA DE LOGIN
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
