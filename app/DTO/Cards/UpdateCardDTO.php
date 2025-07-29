@@ -2,35 +2,23 @@
 
 namespace App\DTO\Cards;
 
-use App\Traits\DTO;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
+use Spatie\LaravelData\Data;
 
-class UpdateCardDTO
+class UpdateCardDTO extends Data
 {
-    use DTO;
-
-    public string   $id;
-    public string   $user_id;
-    public string   $nome;
-    public string   $numero_final;
-    public ?string  $descricao;
-    public float    $anuidade;
-    public ?string  $extras;
-    public bool     $ativo;
-    public bool     $is_compartilhado;
-    public int      $melhor_dia_compra;
-
-    /**
-     * @param  array  $data
-     * @return array
-     */
-    public function customizar(array $data): array
-    {
-        $data['user_id'] = Auth::user()->id;
-        $data['ativo'] = Arr::get($data, 'ativo', false);
-        $data['is_compartilhado'] = Arr::get($data, 'is_compartilhado', false);
-
-        return $data;
+    public function __construct(
+        public string    $id,
+        public string    $user_id,
+        public string    $nome,
+        public string    $numero_final,
+        public ?string   $descricao,
+        public float     $anuidade,
+        public ?string   $extras,
+        public bool|null $ativo,
+        public bool|null $is_compartilhado,
+        public int       $melhor_dia_compra,
+    ) {
+        $this->ativo = !is_null($ativo);
+        $this->is_compartilhado = !is_null($is_compartilhado);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Cards;
 
-use App\DTO\Cards\CreateCardDTO;
 use App\DTO\Cards\UpdateCardDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Validators\Cards\StoreCardValidator;
 use App\Http\Controllers\Validators\Cards\UpdateCardValidator;
 use App\Repositories\Contracts\ICardRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UpdateCardController extends Controller {
@@ -16,18 +16,20 @@ class UpdateCardController extends Controller {
     public function __invoke(
         string $card_id,
         Request $request,
-        UpdateCardDTO $updateCardDTO,
         ICardRepository $cardRepository,
         UpdateCardValidator $updateCardValidator
     )
     { 
-        $request->merge(['id' => $card_id]);
+        $request->merge([
+            'user_id' => Auth::user()->id,
+            'id' => $card_id
+        ]);
 
         $validate = $updateCardValidator->validate($request->input());
 
         try {
             
-            $updateCardDTO->registrar($validate->validated());
+            $updateCardDTO = UpdateCardDTO::from($request->all());
 
             $cardRepository->update($updateCardDTO);
 
