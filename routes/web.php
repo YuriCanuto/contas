@@ -7,6 +7,7 @@ use App\Http\Controllers\Cards\ListarCardsController;
 use App\Http\Controllers\Cards\NovoCardController;
 use App\Http\Controllers\Cards\StoreCardController;
 use App\Http\Controllers\Cards\UpdateCardController;
+use App\Http\Controllers\Contas\ListarContasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/', ListarCardsController::class)->name('listar');
         Route::get('/novo', NovoCardController::class)->name('novo');
         Route::post('/create', StoreCardController::class)->name('store');
-        Route::get('/editar/{card_id}', EditarCardController::class)->name('editar');
-        Route::put('/update/{card_id}', UpdateCardController::class)->name('update');
-        Route::delete('/delete/{card_id}', DeleteCardController::class)->name('delete');
+        Route::get('/{card_id}', EditarCardController::class)->name('editar');
+        Route::put('/{card_id}', UpdateCardController::class)->name('update');
+        Route::delete('/{card_id}', DeleteCardController::class)->name('delete');
+
+        Route::prefix('{card_id}/contas')->name('contas.')->group(function () {
+            Route::get('/', ListarContasController::class)->name('listar');
+        });
     });
 });
 
