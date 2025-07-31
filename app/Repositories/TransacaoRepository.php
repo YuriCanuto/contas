@@ -27,7 +27,7 @@ class TransacaoRepository implements ITransacaoRepository
      * @param null|array $filter
      * @return Collection
      */
-    public function list(string $card_id, array $filter = []): Collection
+    public function getTransacoes(string $card_id, array $filter = []): Collection
     {
         $mes = Arr::get($filter, 'mes', date('n'));
         $ano = Arr::get($filter, 'ano', date('Y'));

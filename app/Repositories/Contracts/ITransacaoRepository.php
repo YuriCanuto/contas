@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface ITransacaoRepository {
 
+    /**
+     * @param array $data
+     * @return Transacao
+     */
     public function create(array $data): Transacao;
-    public function list(string $card_id, array $filter = []): Collection;
+
+    /**
+     * @param string $card_id
+     * @param array $filter
+     * @return Collection
+     */
+    public function getTransacoes(string $card_id, array $filter = []): Collection;
 }

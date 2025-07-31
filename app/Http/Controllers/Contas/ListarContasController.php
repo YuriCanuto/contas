@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Contas;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\ITransacaoRepository;
 
 class ListarContasController extends Controller {
 
     public function __invoke(
-        // ICardRepository $cardRepository
+        string $card_id,
+        ITransacaoRepository $repository
     )
-    { 
-        // $cards = $cardRepository->list([]);
+    {
+        $transacoes = $repository->getTransacoes($card_id);
 
-        // return view('cards.index', [
-        //     'cards' => $cards
-        // ]);
-        dd('contas');
+        return view('contas.index', [
+            'card_id' => $card_id,
+            'contas' => $transacoes
+        ]);
     }
 
 }
