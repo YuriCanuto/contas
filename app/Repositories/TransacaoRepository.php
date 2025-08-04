@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\DTO\Contas\CreateContasDTO;
 use App\Models\Transacao;
 use App\Repositories\Contracts\ITransacaoRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,35 +14,30 @@ class TransacaoRepository implements ITransacaoRepository
     {
     }
 
-    /**
-     * @param array $data
-     * @return Transacao
-     */
-    public function create(array $data): Transacao
+    /** {@inheritdoc } */
+    public function create(CreateContasDTO $dto): Transacao
     {
-        return $this->transacao->create($data);
+        return $this->transacao->create($dto->toArray());
     }
 
-    /**
-     * @param string $card_id
-     * @param null|array $filter
-     * @return Collection
-     */
+    /** {@inheritdoc } */
     public function getTransacoes(string $card_id, array $filter = []): Collection
     {
+        // TRANSFORMAR FILTER EM UM DTO
+
         $mes = Arr::get($filter, 'mes', date('n'));
         $ano = Arr::get($filter, 'ano', date('Y'));
 
         return $this->transacao
             ->where('card_id', $card_id)
-            ->withWhereHas('parcelas', function ($query) use ($mes, $ano) {
-                $query->select([
-                    'id', 'transacao_id', 'parcela', 'valor', 'mes', 'ano',
-                    'desconto', 'is_pago', 'data_pagamento'
-                ]);
-                $query->where('mes', $mes);
-                $query->where('ano', $ano);
-            })
+            // ->withWhereHas('parcelas', function ($query) use ($mes, $ano) {
+            //     $query->select([
+            //         'id', 'transacao_id', 'parcela', 'valor', 'mes', 'ano',
+            //         'desconto', 'is_pago', 'data_pagamento'
+            //     ]);
+            //     $query->where('mes', $mes);
+            //     $query->where('ano', $ano);
+            // })
             ->where('ativo', true)
             ->get();
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Uuids;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,9 +20,9 @@ class Transacao extends Model
 
     protected $fillable = [
         'card_id',
-        'responsavel_id',
-        'data_compra',
+        'user_id',
         'descricao',
+        'data_compra',
         'ativo'
     ];
 
@@ -39,7 +40,7 @@ class Transacao extends Model
     /** @return BelongsTo */
     public function responsavel(): BelongsTo
     {
-        return $this->belongsTo(Responsavel::class, 'responsavel_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /** @return HasMany */

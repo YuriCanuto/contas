@@ -2,16 +2,17 @@
 
 namespace App\Repositories\Contracts;
 
+use App\DTO\Contas\CreateContasDTO;
 use App\Models\Transacao;
 use Illuminate\Database\Eloquent\Collection;
 
 interface ITransacaoRepository {
 
     /**
-     * @param array $data
+     * @param CreateContasDTO $dto
      * @return Transacao
      */
-    public function create(array $data): Transacao;
+    public function create(CreateContasDTO $dto): Transacao;
 
     /**
      * @param string $card_id

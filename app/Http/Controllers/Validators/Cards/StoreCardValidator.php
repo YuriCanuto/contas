@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Validators\Cards;
 
 use App\Http\Controllers\Validators\CommomValidator;
+
 class StoreCardValidator extends CommomValidator
 {
     public function __construct()

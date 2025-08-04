@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transacoes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('card_id')->references('id')->on('cards');
-            $table->foreignUuid('responsavel_id')->references('id')->on('responsaveis');
+            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->date('data_compra');
             $table->string('descricao', 100);
             $table->boolean('ativo')->default(true);

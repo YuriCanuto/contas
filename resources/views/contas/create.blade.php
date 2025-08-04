@@ -27,10 +27,26 @@
                     <form method="POST" action="{{ route('cards.contas.store', ['card_id' => $card_id]) }}">
                         @csrf
                         <div class="col-6">
+
                             <div class="mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="nome" id="nome"
-                                    value="{{ old('nome') }}">
+                                <select class="form-select" aria-label="user_id" name="user_id" id="user_id">
+                                    <option selected>Seleciona um usuário</option>
+                                    @foreach($usuarios as $usuario)
+                                        <option value="{{ $usuario->id }}">{{ $usuario->nome }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <input type="text" class="form-control" name="descricao" id="descricao"
+                                    value="{{ old('descricao') }}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="data_compra" class="form-label">Data da compra</label>
+                                <input type="text" class="form-control" name="data_compra" id="data_compra"
+                                    value="{{ old('data_compra') }}">
                             </div>
 
                             <!-- <div class="mb-3">

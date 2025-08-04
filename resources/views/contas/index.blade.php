@@ -15,7 +15,28 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Parcela</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col">Responsavel</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($contas as $conta)
+                                <tr>
+                                    <td scope="row">{{ $conta->descricao }}</td>
+                                    <td scope="row">{{ $conta->parcela }}</td>
+                                    <td scope="row">{{ $conta->valor }}</td>
+                                    <td scope="row">{{ $conta->responsavel->nome }}</td>
+                                    <td scope="row">{{ $conta->status }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
