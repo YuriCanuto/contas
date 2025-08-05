@@ -2,8 +2,14 @@
 
 namespace App\Repositories\Contracts;
 
-interface IParcelaRepository {
+use App\DTO\Contas\CreateParcelasDTO;
+use App\Models\Parcela;
 
-    public function create(array $data);
-
+interface IParcelaRepository
+{
+    /**
+     * @param CreateParcelasDTO $dto
+     * @return Parcela
+     */
+    public function create(CreateParcelasDTO $dto): Parcela;
 }

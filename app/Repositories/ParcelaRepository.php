@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\DTO\Contas\CreateParcelasDTO;
 use App\Models\Parcela;
 use App\Repositories\Contracts\IParcelaRepository;
 
@@ -11,12 +12,9 @@ class ParcelaRepository implements IParcelaRepository
     {
     }
 
-    /**
-     * @param array $data
-     * @return void
-     */
-    public function create(array $data): void
+    /** {@inheritdoc } */
+    public function create(CreateParcelasDTO $dto): Parcela
     {
-        $this->parcela->create($data);
+        return $this->parcela->create($dto->toArray());
     }
 }

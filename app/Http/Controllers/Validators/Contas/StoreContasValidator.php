@@ -14,10 +14,12 @@ class StoreContasValidator extends CommomValidator
     public function rules() 
     {
         $this->rules =  [
-            'descricao'   => 'required|max:30',
-            'data_compra' => 'required|date_format:d/m/Y',
-            'card_id'     => 'required|uuid',
-            'user_id'     => 'required|uuid',
+            'user_id'      => 'required|uuid',
+            'card_id'      => 'required|uuid',
+            'descricao'    => 'required|max:30',
+            'qtd_parcelas' => 'required',
+            'valor'        => 'required|decimal:2',
+            'data_compra'  => 'required|date_format:d/m/Y',
         ];
     }
 }

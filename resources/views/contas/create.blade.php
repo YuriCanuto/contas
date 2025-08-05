@@ -27,12 +27,11 @@
                     <form method="POST" action="{{ route('cards.contas.store', ['card_id' => $card_id]) }}">
                         @csrf
                         <div class="col-6">
-
                             <div class="mb-3">
                                 <select class="form-select" aria-label="user_id" name="user_id" id="user_id">
                                     <option selected>Seleciona um usuário</option>
                                     @foreach($usuarios as $usuario)
-                                        <option value="{{ $usuario->id }}">{{ $usuario->nome }}</option>
+                                    <option value="{{ $usuario->id }}">{{ $usuario->nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -49,23 +48,17 @@
                                     value="{{ old('data_compra') }}">
                             </div>
 
-                            <!-- <div class="mb-3">
-                                    <label for="numero_final" class="form-label">Cartão Final</label>
-                                    <input type="text" class="form-control" name="numero_final" id="numero_final"
-                                        value="{{ old('numero_final') }}">
-                                </div>
+                            <div class="mb-3">
+                                <label for="qtd_parcelas" class="form-label">Quantidade de parcelas</label>
+                                <input type="text" class="form-control" name="qtd_parcelas" id="qtd_parcelas"
+                                    value="{{ old('qtd_parcelas') }}">
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="anuidade" class="form-label">Anuidade (R$)</label>
-                                    <input type="text" class="form-control" name="anuidade" id="anuidade"
-                                        value="{{ old('anuidade') }}">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="melhor_dia_compra" class="form-label">Melhor dia para compra</label>
-                                    <input type="text" class="form-control" name="melhor_dia_compra"
-                                        id="melhor_dia_compra" value="{{ old('melhor_dia_compra') }}">
-                                </div> -->
+                            <div class="mb-3">
+                                <label for="valor" class="form-label">Valor</label>
+                                <input type="text" class="form-control" name="valor" id="valor"
+                                    value="{{ old('valor') }}">
+                            </div>
                         </div>
 
                         <button class="btn btn-primary" type="submit">Salvar</button>
