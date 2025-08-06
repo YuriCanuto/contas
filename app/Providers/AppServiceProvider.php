@@ -10,6 +10,7 @@ use App\Repositories\Contracts\IUserRepository;
 use App\Repositories\ParcelaRepository;
 use App\Repositories\TransacaoRepository;
 use App\Repositories\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Carbon::setLocale('pt_BR');
+        setlocale(LC_TIME, 'pt_BR');
     }
 }

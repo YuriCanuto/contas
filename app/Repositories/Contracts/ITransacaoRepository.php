@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
+use App\DTO\CommomDTO;
 use App\DTO\Contas\CreateContasDTO;
 use App\Models\Transacao;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,9 +16,8 @@ interface ITransacaoRepository {
     public function create(CreateContasDTO $dto): Transacao;
 
     /**
-     * @param string $card_id
-     * @param array $filter
+     * @param CommomDTO $dto
      * @return Collection
      */
-    public function getTransacoes(string $card_id, array $filter = []): Collection;
+    public function getTransacoes(CommomDTO $dto): Collection;
 }

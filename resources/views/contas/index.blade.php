@@ -9,7 +9,15 @@
                 <div class="card-header d-flex flex-row justify-content-between align-items-center">
                     {{ __('Contas') }}
                     <div>
-                        <a class="btn btn-sm btn-success" href="{{ url()->previous() }}" role="button">Voltar</a>
+                        <a class="btn btn-sm btn-link" href="{{ $url_mes_anterior }}"><<</a>
+                        <span><b>{{ $mes_atual }}</b></span>
+                        <a class="btn btn-sm btn-link" href="{{ $url_proximo_mes }}">>></a>
+                    </div>
+                    <div>
+                        <span>Valor Total: <b>{{ $valor_total }}</b></span>
+                    </div>
+                    <div>
+                        <a class="btn btn-sm btn-success" href="{{ route('cards.listar') }}" role="button">Voltar</a>
                         <a class="btn btn-sm btn-primary" href="{{ route('cards.contas.novo', ['card_id' => $card_id]) }}" role="button">Nova Conta</a>
                     </div>
                 </div>
@@ -32,7 +40,7 @@
                                     <td scope="row">{{ $conta->parcela }}</td>
                                     <td scope="row">{{ $conta->valor }}</td>
                                     <td scope="row">{{ $conta->responsavel->nome }}</td>
-                                    <td scope="row">{{ $conta->status }}</td>
+                                    <td scope="row">{!! $conta->status !!}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
