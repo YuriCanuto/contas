@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
 
 if (! function_exists('meses_do_ano')) {
@@ -38,5 +39,30 @@ if (! function_exists('get_true_ou_false')) {
 if (! function_exists('array_filter_null')) {
     function array_filter_null(array $value): array {
         return array_filter($value, fn ($value) => !is_null($value));
+    }
+}
+
+if (! function_exists('datas_calendario')) {
+    function datas_calendario(string $ano, string $mes, string $url): array {
+
+        $mesAtual = CarbonImmutable::createFromDate($ano, $mes, 1);
+        $dataAnterior = $mesAtual->subMonthsNoOverflow(1);
+        $dataPosterior = $mesAtual->addMonths(1);
+
+        $urlMesAnterior = "$url?".http_build_query([
+            'mes' => $dataAnterior->format('n'),
+            'ano' => $dataAnterior->format('Y')
+        ]);
+
+        $urlProximoMes = "$url?".http_build_query([
+            'mes' => $dataPosterior->format('n'),
+            'ano' => $dataPosterior->format('Y')
+        ]);
+
+        return [
+            'mes_atual' => $mesAtual->translatedFormat('F \de Y'),
+            'url_mes_anterior' => $urlMesAnterior,
+            'url_proximo_mes' => $urlProximoMes
+        ];
     }
 }

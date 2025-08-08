@@ -8,6 +8,7 @@ use App\Repositories\Contracts\ITransacaoRepository;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ListarContasController extends Controller {
 
@@ -30,27 +31,16 @@ class ListarContasController extends Controller {
             return $value->parcelas->first()->valor;
         });
 
-        // CRIAR UM HELPER
-        $mesAtual = CarbonImmutable::createFromDate($dto->ano, $dto->mes, 1);
-        $dataAnterior = $mesAtual->subMonthsNoOverflow(1);
-        $dataPosterior = $mesAtual->addMonths(1);
-
-        $urlMesAnterior = $request->url()."?".http_build_query([
-            'mes' => $dataAnterior->format('n'),
-            'ano' => $dataAnterior->format('Y')
-        ]);
-
-        $urlProximoMes = $request->url()."?".http_build_query([
-            'mes' => $dataPosterior->format('n'),
-            'ano' => $dataPosterior->format('Y')
-        ]);
+        $dadosCalendario = datas_calendario(
+            $dto->ano, $dto->mes, $request->url()
+        );
 
         return view('contas.index', [
             'card_id'          => $card_id,
             'contas'           => $transacoes,
-            'mes_atual'        => ucfirst($mesAtual->translatedFormat('F \de Y')),
-            'url_mes_anterior' => $urlMesAnterior,
-            'url_proximo_mes'  => $urlProximoMes,
+            'mes_atual'        => ucfirst(Arr::get($dadosCalendario, 'mes_atual')),
+            'url_mes_anterior' => Arr::get($dadosCalendario, 'url_mes_anterior'),
+            'url_proximo_mes'  => Arr::get($dadosCalendario, 'url_proximo_mes'),
             'valor_total'      => $valorTotal,
         ]);
     }

@@ -31,6 +31,7 @@ class TransacaoRepository implements ITransacaoRepository
                 $query->where('ano', $dto->ano);
             })
             ->where('ativo', true)
+            ->orderBy('user_id')
             ->get();
     }
 }

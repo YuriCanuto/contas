@@ -30,7 +30,7 @@
                                     <th scope="col">Parcela</th>
                                     <th scope="col">Valor</th>
                                     <th scope="col">Responsavel</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Pago</th>
                                 </tr>
                             </thead>
                             <tbody>
