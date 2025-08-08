@@ -28,8 +28,8 @@ return new class extends Migration
             $table->char('mes', 2);
             $table->char('ano', 4);
             $table->char('parcela', 3);
-            $table->float('valor', 10, 2);
-            $table->float('desconto', 10, 2)->default(0);
+            $table->decimal('valor', 10, 2);
+            $table->decimal('desconto', 10, 2)->default(0);
             $table->boolean('ativo')->default(true);
             $table->boolean('is_pago')->default(false);
             $table->dateTime('data_pagamento')->nullable();

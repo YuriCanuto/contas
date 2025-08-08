@@ -5,15 +5,29 @@
     <div class="row justify-content-center">
         <div class="col-md-3">
             @include('layouts.menu')
+            <div class="mt-3 card">
+                <div class="card-header">
+                    Responsáveis
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach($contas_usuarios as $conta)
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ $conta->nome }}</span>
+                        <span>{{ $conta->total }}</span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header d-flex flex-row justify-content-between align-items-center">
                     {{ __('Contas') }}
                     <div>
-                        <a class="btn btn-sm btn-link" href="{{ $url_mes_anterior }}"><<</a>
-                        <span><b>{{ $mes_atual }}</b></span>
-                        <a class="btn btn-sm btn-link" href="{{ $url_proximo_mes }}">>></a>
+                        <a class="btn btn-sm btn-link" href="{{ $url_mes_anterior }}">
+                            << </a>
+                                <span><b>{{ $mes_atual }}</b></span>
+                                <a class="btn btn-sm btn-link" href="{{ $url_proximo_mes }}">>></a>
                     </div>
                     <div>
                         <span>Valor Total: <b>{{ $valor_total }}</b></span>

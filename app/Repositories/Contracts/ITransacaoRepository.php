@@ -6,6 +6,7 @@ use App\DTO\CommomDTO;
 use App\DTO\Contas\CreateContasDTO;
 use App\Models\Transacao;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 interface ITransacaoRepository {
 
@@ -20,4 +21,10 @@ interface ITransacaoRepository {
      * @return Collection
      */
     public function getTransacoes(CommomDTO $dto): Collection;
+
+    /**
+     * @param CommomDTO $dto
+     * @return SupportCollection
+     */
+    public function getTotalTrasacoesDosUsuarios(CommomDTO $dto): SupportCollection;
 }

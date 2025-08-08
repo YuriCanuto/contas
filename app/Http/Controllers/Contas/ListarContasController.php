@@ -27,6 +27,8 @@ class ListarContasController extends Controller {
 
         $transacoes = $repository->getTransacoes($dto);
 
+        $contasUsuarios = $repository->getTotalTrasacoesDosUsuarios($dto);
+
         $valorTotal = $transacoes->sum(function($value) {
             return $value->parcelas->first()->valor;
         });
@@ -42,6 +44,7 @@ class ListarContasController extends Controller {
             'url_mes_anterior' => Arr::get($dadosCalendario, 'url_mes_anterior'),
             'url_proximo_mes'  => Arr::get($dadosCalendario, 'url_proximo_mes'),
             'valor_total'      => $valorTotal,
+            'contas_usuarios'  => $contasUsuarios,
         ]);
     }
 
