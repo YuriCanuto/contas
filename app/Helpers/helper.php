@@ -3,6 +3,12 @@
 use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
 
+if (! function_exists('dias_do_mes')) {
+    function dias_do_mes(): array {
+        return range(1, 31);
+    }
+}
+
 if (! function_exists('meses_do_ano')) {
     function meses_do_ano(): array {
         return [
@@ -24,7 +30,7 @@ if (! function_exists('meses_do_ano')) {
 
 if (! function_exists('range_ano')) {
     function range_ano(): array {
-        return collect(CarbonPeriod::create('2023-01-01', '1 year', now()->endOfYear()))
+        return collect(CarbonPeriod::create('2024-01-01', '1 year', now()->addYearNoOverflow(3)->endOfYear()))
             ->map(fn($ano) => $ano->format('Y'))
             ->toArray();
     }

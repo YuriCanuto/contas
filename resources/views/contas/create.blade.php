@@ -33,7 +33,7 @@
                                 <select class="form-select" aria-label="user_id" name="user_id" id="user_id">
                                     <option selected>Seleciona um usuário</option>
                                     @foreach($usuarios as $usuario)
-                                    <option value="{{ $usuario->id }}">{{ $usuario->nome }}</option>
+                                        <option value="{{ $usuario->id }}" @selected(old("user_id") == $usuario->id)>{{ $usuario->nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -44,10 +44,36 @@
                                     value="{{ old('descricao') }}">
                             </div>
 
-                            <div class="mb-3">
-                                <label for="data_compra" class="form-label">Data da compra</label>
-                                <input type="text" class="form-control" name="data_compra" id="data_compra"
-                                    value="{{ old('data_compra') }}">
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <label for="dia_compra" class="form-label">Dia da compra</label>
+                                    <select class="form-select" aria-label="dia_compra" name="dia_compra" id="dia_compra">
+                                        <option selected>Dia</option>
+                                        @foreach(dias_do_mes() as $dia)
+                                        <option value="{{ $dia }}">{{ $dia }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="mes_compra" class="form-label">Mês da compra</label>
+                                    <select class="form-select" aria-label="mes_compra" name="mes_compra" id="mes_compra">
+                                        <option selected>Mês</option>
+                                        @foreach(meses_do_ano() as $key => $mes)
+                                        <option value="{{ $key }}">{{ $mes }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="ano_compra" class="form-label">Ano da compra</label>
+                                    <select class="form-select" aria-label="ano_compra" name="ano_compra" id="ano_compra">
+                                        <option selected>Ano</option>
+                                        @foreach(range_ano() as $ano)
+                                        <option value="{{ $ano }}">{{ $ano }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="mb-3">
